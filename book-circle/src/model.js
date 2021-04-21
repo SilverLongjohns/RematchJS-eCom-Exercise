@@ -5,9 +5,11 @@ export default {
     },
     reducers: {
         addToBasketSuccess(state, data) {
+            var { cart } = state
+            cart.push(data);
             return {
                 ...state,
-                cart: this.cart.push(data),
+                cart: cart,
             }
         }
     },
