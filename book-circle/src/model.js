@@ -23,6 +23,18 @@ export default {
                 ...state,
                 total: total,
             }
+        },
+        removeFromBasketSuccess(state, data) {
+            var { cart } = state;
+            for (let book of cart) {
+                if(book.title === data.title) {
+                    cart.splice(cart.indexOf(book), 1)
+                };
+            };
+            return {
+                ...state,
+                cart: cart,
+            }
         }
     },
     effects: {
@@ -40,7 +52,15 @@ export default {
             } catch (err) {
                 console.log(err)
             }
-        }
+        },
+        removeFromBasket(book) {
+            try {
+                this.removeFromBasketSuccess(book);
+                this.updateTotal();
+            } catch (err) {
+                console.log(err)
+            }
+        },
     },
 
 }
