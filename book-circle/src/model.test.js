@@ -49,4 +49,31 @@ describe("A basket", () => {
         const {books} = getState();
         expect(books.total).toBe(15);
     })
+
+    it("should have apply 10% discount when three books are in cart", () => {
+        const {dispatch, getState} = store;
+        dispatch.books.addToBasket({title: "book1", price: 10});
+        dispatch.books.addToBasket({title: "book2", price: 15});
+        dispatch.books.addToBasket({title: "book3", price: 10});
+        dispatch.books.applyDiscount();
+        const {books} = getState();
+        expect(books.total).toBe(31.50);
+    })
+
+    it("should not apply 10% discount when there are less than three books in the cart", () => {
+        const {dispatch, getState} = store;
+        dispatch.books.addToBasket({title: "book1", price: 10});
+        dispatch.books.addToBasket({title: "book2", price: 15});
+        dispatch.books.applyDiscount();
+        const {books} = getState();
+        expect(books.total).toBe(25);
+    })
+
+    it("should apply 25% discount on Friday for The Twits", () => {
+        const {dispatch, getState} = store;
+        dispatch.books.addToBasket({title: "The Twits", price: 10});
+        dispatch.books.flashSale();
+        const {books} = getState();
+        expect(books.total).toBe(7.50);
+    })
 });

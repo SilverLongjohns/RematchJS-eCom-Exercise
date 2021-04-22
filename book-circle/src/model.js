@@ -35,7 +35,23 @@ export default {
                 ...state,
                 cart: cart,
             }
+        },
+        applyDiscountSuccess(state) {
+            var { cart, total } = state;
+            if(cart.length === 3) {
+                total = total*.90;
+            }
+
+            return {
+                ...state,
+                total: total,
+            }
+        },
+        flashSaleSuccess(state, data, day) {
+            var { cart } = state;
+
         }
+
     },
     effects: {
         addToBasket(book) {
@@ -61,7 +77,22 @@ export default {
                 console.log(err)
             }
         },
+        applyDiscount() {
+            try {
+                this.applyDiscountSuccess();
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        flashSale(bookTitle, day) {
+            try {
+                this.flashSaleSuccess(bookTitle, day);
+            } catch (err) {
+                console.log(err)
+            }
+        },
     },
+
 
 }
 
