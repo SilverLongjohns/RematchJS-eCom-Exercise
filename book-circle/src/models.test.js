@@ -1,12 +1,12 @@
 import { init } from "@rematch/core";
-import model from './model';
+import { models } from './models';
 
 describe("A basket", () => {
     let store;
     beforeEach(() => {
     store = init({
         models: {
-            books: { ...model, state: { cart: [], total: 0 } },
+            books: { ...models, state: { cart: [], total: 0 } },
         },
     })
     })
@@ -71,9 +71,12 @@ describe("A basket", () => {
 
     it("should apply 25% discount on Friday for The Twits", () => {
         const {dispatch, getState} = store;
+        var MockDate = require('mockdate');
+        MockDate.set(1619776569000);
         dispatch.books.addToBasket({title: "The Twits", price: 10});
-        dispatch.books.flashSale();
+        dispatch.books.flashSale("The Twits");
         const {books} = getState();
         expect(books.total).toBe(7.50);
-    })
+        MockDate.reset();
+    });
 });
