@@ -8,10 +8,9 @@ const App = ({
              }) => (
     <div className="App">
         <div className="Basket">
-<p>In Basket: {cart.join("|")}</p>
+<p>In Basket: {cart.map(book => book.title).join(" | ")}</p>
         <p>Total: {total.toString()}</p>
         </div>
-
         <div className="Book">
             <p>The Giver</p><p>10.00</p>
             <button onClick={() => addToBasket({title: "The Giver", price: 10.00})}>Buy</button>
