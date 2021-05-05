@@ -1,4 +1,4 @@
-export default {
+export const models = {
 
     state: {
         cart: [],
@@ -47,9 +47,21 @@ export default {
                 total: total,
             }
         },
-        flashSaleSuccess(state, data, day) {
+        flashSaleSuccess(state, data) {
             var { cart } = state;
-
+            const day = new Date();
+            const dayOfWeek = day.getDay();
+            if(dayOfWeek === 5) {
+                for (let book of cart) {
+                    if(book.title === data) {
+                        book.price = book.price * 0.75
+                    };
+                };
+            }
+            return {
+                ...state,
+                cart: cart,
+            }
         }
 
     },
@@ -84,16 +96,13 @@ export default {
                 console.log(err)
             }
         },
-        flashSale(bookTitle, day) {
+        flashSale(bookTitle) {
             try {
-                this.flashSaleSuccess(bookTitle, day);
+                this.flashSaleSuccess(bookTitle);
+                this.updateTotal();
             } catch (err) {
                 console.log(err)
             }
         },
     },
-
-
 }
-
-

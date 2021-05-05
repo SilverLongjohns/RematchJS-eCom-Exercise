@@ -1,26 +1,22 @@
-import logo from '../logo.svg';
-import './App.css';
+import React, {Component, useEffect} from 'react'
+import { connect } from 'react-redux';
 
-function App() {
-
-  return (
+const App = ({
+    total,
+    cart,
+    addToBasket,
+             }) => (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+        <div className="Basket">
+<p>In Basket: {cart.join("|")}</p>
+        <p>Total: {total.toString()}</p>
+        </div>
 
-export default App;
+        <div className="Book">
+            <p>The Giver</p><p>10.00</p>
+            <button onClick={() => addToBasket({title: "The Giver", price: 10.00})}>Buy</button>
+        </div>
+    </div>
+)
+
+export default connect(({models}) => ({...models}), ({models}) => ({...models}))(App);
