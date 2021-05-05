@@ -1,5 +1,6 @@
 import React, {Component, useEffect} from 'react'
 import { connect } from 'react-redux';
+import Books from './books'
 
 const App = ({
     total,
@@ -11,10 +12,9 @@ const App = ({
 <p>In Basket: {cart.map(book => book.title).join(" | ")}</p>
         <p>Total: {total.toString()}</p>
         </div>
-        <div className="Book">
-            <p>The Giver</p><p>10.00</p>
-            <button onClick={() => addToBasket({title: "The Giver", price: 10.00})}>Buy</button>
-        </div>
+        <Books add={addToBasket} book={{title: "The Giver", price: 10}} />
+        <Books add={addToBasket} book={{title: "The Lord of the Rings", price: 20}} />
+        <Books add={addToBasket} book={{title: "Harry Potter", price: 30}} />
     </div>
 )
 
