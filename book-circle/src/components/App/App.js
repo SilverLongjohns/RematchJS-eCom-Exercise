@@ -1,6 +1,6 @@
 import React, {Component, useEffect} from 'react'
 import { connect } from 'react-redux';
-import Books from './books'
+import Book from '../Book/Book'
 
 const App = ({
     total,
@@ -9,12 +9,12 @@ const App = ({
              }) => (
     <div className="App">
         <div className="Basket">
-<p>In Basket: {cart.map(book => book.title).join(" | ")}</p>
+<p>In Basket: {cart.map(book => <p>{book.title}</p>)}</p> {/*Make a component from the <p></p> tags*/}
         <p>Total: {total.toString()}</p>
         </div>
-        <Books add={addToBasket} book={{title: "The Giver", price: 10}} />
-        <Books add={addToBasket} book={{title: "The Lord of the Rings", price: 20}} />
-        <Books add={addToBasket} book={{title: "Harry Potter", price: 30}} />
+        <Book add={addToBasket} book={{title: "The Giver", price: 10}} />
+        <Book add={addToBasket} book={{title: "The Lord of the Rings", price: 20}} />
+        <Book add={addToBasket} book={{title: "Harry Potter", price: 30}} />
     </div>
 )
 

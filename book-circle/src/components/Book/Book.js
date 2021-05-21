@@ -1,7 +1,7 @@
 import React, {Component, useEffect} from 'react'
 import { connect } from 'react-redux';
 
-const Books = ( {
+const Book = ({
     add,
     book,
                }) => (
@@ -11,4 +11,4 @@ const Books = ( {
     </div>
 )
 
-export default Books
+export default Book
